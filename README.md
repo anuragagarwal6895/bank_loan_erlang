@@ -4,21 +4,18 @@
 Briefly, your objective is to model a simple banking environment. Specifically, you will be given a small number of customers, each of whom will contact a set of banks to request a number of loans. Eventually, they will either receive all of the money they require or they will terminate without completely meeting their original objective. The application will display information about the various banking transactions before it finishes. That’s it.
 DETAILS: So now for the details. To begin, you will need a handful of customers and banks. These will be supplied in a pair of very simple text files - one for customers and one for banks. While Erlang provides many file primitives for processing disk files, the process is not quite as simple as Clojure’s slurp() function. So your two input files will contain records that are already pre- formatted. In other words, they are ready to be read directly into standard Erlang data structures.
  
-An example customer file might be:
-{jill,450}.
-{joe,157}.
-{bob,100}.
+An example customer file might be:<br>
+{jill,450}.<br>
+{joe,157}.<br>
+{bob,100}.<br>
 
-An example bank file might be:
-{rbc,800}.
-{bmo,700}.
-{ing,200}.
+An example bank file might be:<br>
+{rbc,800}.<br>
+{bmo,700}.<br>
+{ing,200}.<br>
 
 In other words, each file simply contains a set of Erlang tuples. The first element of each tuple is an atom (note that atoms start with a lower-case letter). The atoms will represent the names of the customers and banks respectively (so no string processing is required). You will see that each atom/label is associated with a number. For customers, this is the total funds that they are hoping to obtain. For banks, the number represents their total financial resources that can be used for loans.
 To read these files, we use the consult() function in the file module. This will load the contents of either file directly into an Erlang structure (i.e., a list of tuples). Note that NO error checking is required. The text files are guaranteed to contain valid data.
-Because you (and the graders) will want to run the program with different input files, we don’t want to hard-code the file names. Instead, they will be passed as command line parameters. While this isn’t especially difficult to do, I don’t want you to waste time trying to get this to work. So after compiling your source files with erlc, you will run your program with the following invocation on the command line:
-erl -noshell -run money start c1.txt b1.txt -s init stop
-This will run a program in which the main module (i.e., source file) is called money. Within money, the initial function (e.g., like main in Java) will be called start. The start function will accept a list of two parameters, in this case c1.txt and b1.txt. These, of course, are the names of the customer file and bank file. You can call them anything you like (the graders will provide their own test files).
 
 Inside the money.erl source file, you will have the following code at the top of the file: -module(money).
 -export([start/1]).
